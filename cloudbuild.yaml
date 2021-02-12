@@ -1,0 +1,32 @@
+steps:
+#
+# Build
+#
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "--tag=eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+      - "--tag=eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder:${_NODE_VERSION}"
+      - "--tag=eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder:${COMMIT_SHA}"
+      - "--build-arg"
+      - "NODE_VERSION=${_NODE_VERSION}"
+      - "--build-arg"
+      - "TYPESCRIPT_VERSION=${_TYPESCRIPT_VERSION}"
+      - "--build-arg"
+      - "LERNA_VERSION=${_LERNA_VERSION}"
+      - "--build-arg"
+      - "VUE_CLI_VERSION=${_VUE_CLI_VERSION}"
+      - "."
+#
+images:
+  - "eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+#
+# Config
+#
+timeout: 3600s
+#
+substitutions:
+  _NODE_VERSION: "14"
+  _TYPESCRIPT_VERSION: "4.x"
+  _LERNA_VERSION: "3.x"
+  _VUE_CLI_VERSION: "4.x"
