@@ -37,7 +37,5 @@ RUN set -eux; \
     rm -rf /var/lib/apt/lists/*; \
     chown -R node:node /workspace;
 
-USER node
-
 ENTRYPOINT [ "yarn" ]
 CMD [ "help" ]
