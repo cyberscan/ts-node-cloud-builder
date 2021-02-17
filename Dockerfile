@@ -1,6 +1,6 @@
 ARG NODE_VERSION=14
 
-FROM node:${NODE_VERSION}-buster
+FROM node:${NODE_VERSION}-buster-slim
 
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
@@ -17,10 +17,10 @@ ENV LANG=C.UTF-8 \
     NPM_CONFIG_PREFIX="$NPM_CONFIG_PREFIX" \
 # https://github.com/yarnpkg/yarn/issues/3287#issuecomment-298987967
     PREFIX="$NPM_CONFIG_PREFIX" \
-    PATH="$NPM_CONFIG_PREFIX/bin:/workspace/node_modules/.bin:$PATH"
+    PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
 # https://cloud.google.com/build/docs/build-config#dir
-WORKDIR /workspace
+#WORKDIR /workspace
 
 RUN set -eux; \
     apt-get update; \
@@ -34,8 +34,7 @@ RUN set -eux; \
     yarn cache clean --all; \
     apt-get clean; \
     apt-get autoremove --yes; \
-    rm -rf /var/lib/apt/lists/*; \
-    chown -R node:node /workspace;
+    rm -rf /var/lib/apt/lists/*;
 
 ENTRYPOINT [ "yarn" ]
 CMD [ "help" ]
