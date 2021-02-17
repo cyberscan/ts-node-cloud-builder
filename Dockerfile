@@ -19,9 +19,6 @@ ENV LANG=C.UTF-8 \
     PREFIX="$NPM_CONFIG_PREFIX" \
     PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
-# https://cloud.google.com/build/docs/build-config#dir
-#WORKDIR /workspace
-
 RUN set -eux; \
     apt-get update; \
     apt-get upgrade --yes; \

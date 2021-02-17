@@ -11,7 +11,7 @@ steps:
 #
 # Do Lerna things
 #
-  - name: "eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
     entrypoint: "lerna"
     args:
       - "bootstrap"
@@ -19,7 +19,7 @@ steps:
 # Do Yarn/npm things (e.g. package.json script invocation)
 # The default entrypoint of the container is yarn, so this works:
 #
-  - name: "eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
     args:
       - "run"
       - "build"
@@ -27,7 +27,7 @@ steps:
 # You could also invoke any arbitrary command by specifying it as
 # entrypoint. Bash might be handy occasionally, for example:
 #
-  - name: "eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
     entrypoint: "bash"
     args:
       - "-c"
