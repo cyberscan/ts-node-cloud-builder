@@ -4,6 +4,7 @@ FROM node:${NODE_VERSION}-buster
 
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
+ARG CPX_VERSION=1.5.x
 ARG VUE_CLI_VERSION=4.x
 
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#global-npm-dependencies
@@ -28,6 +29,7 @@ RUN set -eux; \
     yarn global add \
         "typescript@${TYPESCRIPT_VERSION}" \
         "lerna@${LERNA_VERSION}" \
+        "cpx@${CPX_VERSION}" \
         "@vue/cli@${VUE_CLI_VERSION}" \
         "@vue/cli-service-global@${VUE_CLI_VERSION}" \
     ; \
