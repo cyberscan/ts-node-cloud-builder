@@ -5,9 +5,9 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "build"
-      - "--tag=eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
-      - "--tag=eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder:${_NODE_VERSION}"
-      - "--tag=eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder:${COMMIT_SHA}"
+      - "--tag=gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+      - "--tag=gcr.io/${PROJECT_ID}/ts-node-cloud-builder:${_NODE_VERSION}"
+      - "--tag=gcr.io/${PROJECT_ID}/ts-node-cloud-builder:${COMMIT_SHA}"
       - "--build-arg"
       - "NODE_VERSION=${_NODE_VERSION}"
       - "--build-arg"
@@ -19,7 +19,7 @@ steps:
       - "."
 #
 images:
-  - "eu.gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
+  - "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
 #
 # Config
 #
