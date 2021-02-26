@@ -20,6 +20,13 @@ ENV LANG=C.UTF-8 \
     PREFIX="$NPM_CONFIG_PREFIX" \
     PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
+COPY lerna-resolver /home/node/lerna-resolver
+WORKDIR /home/node/lerna-resolver
+RUN set -eux; \
+    npm install; \
+    npm link;
+
+
 RUN set -eux; \
     apt-get update; \
     apt-get upgrade --yes; \
