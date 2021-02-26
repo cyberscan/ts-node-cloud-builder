@@ -26,7 +26,6 @@ RUN set -eux; \
     npm install; \
     npm link;
 
-
 RUN set -eux; \
     apt-get update; \
     apt-get upgrade --yes; \
