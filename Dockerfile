@@ -5,7 +5,7 @@ FROM node:${NODE_VERSION}-buster-slim
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
 ARG CPX_VERSION=1.5.x
-ARG VUE_CLI_VERSION=4.x
+ARG VUE_CLI_VERSION=next
 
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#global-npm-dependencies
 ARG NPM_CONFIG_PREFIX=/home/node/.npm-global
