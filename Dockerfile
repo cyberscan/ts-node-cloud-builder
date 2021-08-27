@@ -1,6 +1,7 @@
 ARG NODE_VERSION=14
 
-FROM node:${NODE_VERSION}-buster-slim
+FROM node:${NODE_VERSION}
+#-buster-slim
 
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
@@ -23,7 +24,7 @@ ENV LANG=C.UTF-8 \
 COPY lerna-resolver /home/node/lerna-resolver
 WORKDIR /home/node/lerna-resolver
 
-RUN apt install bzip2
+RUN apt-get install bzip2
 
 RUN set -eux; \
     npm install; \
