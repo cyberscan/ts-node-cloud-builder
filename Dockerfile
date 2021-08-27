@@ -22,6 +22,9 @@ ENV LANG=C.UTF-8 \
 
 COPY lerna-resolver /home/node/lerna-resolver
 WORKDIR /home/node/lerna-resolver
+
+RUN apt install bzip2
+
 RUN set -eux; \
     npm install; \
     npm link;
