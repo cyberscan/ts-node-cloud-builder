@@ -1,6 +1,0 @@
-.editorconfig
-.gcloudignore
-.idea
-README.md
-cloudbuild.yaml
-node_modules
