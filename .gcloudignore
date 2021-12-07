@@ -1,4 +1,5 @@
-.idea
-cloudbuild.yaml
+.editorconfig
 .gcloudignore
+.idea
 README.md
+cloudbuild.yaml

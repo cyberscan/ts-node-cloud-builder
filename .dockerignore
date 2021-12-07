@@ -1,7 +1,9 @@
-.git
-.gitignore
-cloudbuild.yaml
-.gcloudignore
-Dockerfile
 .dockerignore
+.editorconfig
+.gcloudignore
+.git
+.gitattributes
+.gitignore
+Dockerfile
 README.md
+cloudbuild.yaml
