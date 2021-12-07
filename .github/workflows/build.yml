@@ -26,12 +26,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Get access to GCR: https://github.com/docker/login-action#google-container-registry-gcr
-      - name: Log in to Google Container Registry (cyberscan2)
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: gcr.io
-          username: _json_key
-          password: ${{ secrets.GCR_JSON_KEY }}
+      # - name: Log in to Google Container Registry (cyberscan2)
+      #   uses: docker/login-action@v1.10.0
+      #   with:
+      #     registry: gcr.io
+      #     username: _json_key
+      #     password: ${{ secrets.GCR_JSON_KEY }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1.6.0
@@ -40,35 +40,36 @@ jobs:
         id: build
         uses: docker/build-push-action@v2.7.0
         with:
-          cache-from: type=gha
-          cache-to: type=gha
+          #cache-from: type=gha
+          #cache-to: type=gha
           push: true
           tags: |
             gcr.io/${{ github.repository }}:latest
             gcr.io/${{ github.repository }}/commit:${{ github.sha }}
             gcr.io/${{ github.repository }}:${{ env.BUILD_TIMESTAMP }}
-            gcr.io/cyberscan2/ts-node-cloud-builder:latest
-            gcr.io/cyberscan2/ts-node-cloud-builder/commit:${{ github.sha }}
-            gcr.io/cyberscan2/ts-node-cloud-builder:${{ env.BUILD_TIMESTAMP }}
+
+          # gcr.io/cyberscan2/ts-node-cloud-builder:latest
+          # gcr.io/cyberscan2/ts-node-cloud-builder/commit:${{ github.sha }}
+          # gcr.io/cyberscan2/ts-node-cloud-builder:${{ env.BUILD_TIMESTAMP }}
 
       # The image is also tagged & pushed as gcr.io/cyberscanauth/ts-node-cloud-builder for backwards compat.
       # This needs to happen in an extra step because both GCP projects share the same registry hostname (gcr.io)
       # and should probably be removed eventually.
-      - name: Log in to Google Container Registry (cyberscanauth)
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: gcr.io
-          username: _json_key
-          password: ${{ secrets.LEGACY_GCR_JSON_KEY }}
+      # - name: Log in to Google Container Registry (cyberscanauth)
+      #   uses: docker/login-action@v1.10.0
+      #   with:
+      #     registry: gcr.io
+      #     username: _json_key
+      #     password: ${{ secrets.LEGACY_GCR_JSON_KEY }}
 
-      - name: Push image to cyberscanauth Google Container Registry
-        uses: akhilerm/tag-push-action@v2.0.0
-        with:
-          src: gcr.io/cyberscan2/ts-node-cloud-builder/commit:${{ github.sha }}
-          dst: |
-            gcr.io/cyberscanauth/ts-node-cloud-builder:latest
-            gcr.io/cyberscanauth/ts-node-cloud-builder/commit:${{ github.sha }}
-            gcr.io/cyberscanauth/ts-node-cloud-builder:${{ env.BUILD_TIMESTAMP }}
+      # - name: Push image to cyberscanauth Google Container Registry
+      #   uses: akhilerm/tag-push-action@v2.0.0
+      #   with:
+      #     src: gcr.io/cyberscan2/ts-node-cloud-builder/commit:${{ github.sha }}
+      #     dst: |
+      #       gcr.io/cyberscanauth/ts-node-cloud-builder:latest
+      #       gcr.io/cyberscanauth/ts-node-cloud-builder/commit:${{ github.sha }}
+      #       gcr.io/cyberscanauth/ts-node-cloud-builder:${{ env.BUILD_TIMESTAMP }}
 
       - name: Return image digest
         run: echo ${{ steps.build.outputs.digest }}
