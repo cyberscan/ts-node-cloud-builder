@@ -1,7 +1,6 @@
-ARG NODE_VERSION=14
+ARG NODE_VERSION=16
 
-FROM node:${NODE_VERSION}
-#-buster-slim
+FROM node:${NODE_VERSION}-buster-slim
 
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
@@ -21,28 +20,29 @@ ENV LANG=C.UTF-8 \
     PREFIX="$NPM_CONFIG_PREFIX" \
     PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
-COPY lerna-resolver /home/node/lerna-resolver
-WORKDIR /home/node/lerna-resolver
-
-RUN apt-get install bzip2
-
-RUN set -eux; \
-    npm install; \
-    npm link;
+WORKDIR /home/node
+COPY --chown=node:node lerna-resolver lerna-resolver
 
 RUN set -eux; \
     apt-get update; \
     apt-get upgrade --yes; \
+    apt-get install --yes --no-install-recommends \
+      bzip2 \
+    ; \
+    cd lerna-resolver; \
+      yarn pack lerna-resolver ; \
+    cd - ; \
     yarn global add \
-        "typescript@${TYPESCRIPT_VERSION}" \
-        "lerna@${LERNA_VERSION}" \
-        "cpx@${CPX_VERSION}" \
-        "@vue/cli@${VUE_CLI_VERSION}" \
-        "@vue/cli-service-global@${VUE_CLI_VERSION}" \
+      "file:///home/node/lerna-resolver/lerna-resolver-v1.0.0.tgz" \
+      "typescript@${TYPESCRIPT_VERSION}" \
+      "lerna@${LERNA_VERSION}" \
+      "cpx@${CPX_VERSION}" \
+      "@vue/cli@${VUE_CLI_VERSION}" \
+      "@vue/cli-service-global@${VUE_CLI_VERSION}" \
     ; \
     yarn cache clean --all; \
+    rm -f lerna-resolver/lerna-resolver-v1.0.0.tgz; \
     apt-get clean; \
-    apt-get autoremove --yes; \
     rm -rf /var/lib/apt/lists/*;
 
 ENTRYPOINT [ "yarn" ]
