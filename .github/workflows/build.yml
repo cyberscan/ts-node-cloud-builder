@@ -44,9 +44,9 @@ jobs:
           #cache-to: type=gha
           push: true
           tags: |
-            gcr.io/${{ github.repository }}:latest
-            gcr.io/${{ github.repository }}/commit:${{ github.sha }}
-            gcr.io/${{ github.repository }}:${{ env.BUILD_TIMESTAMP }}
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}/commit:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:${{ env.BUILD_TIMESTAMP }}
 
           # gcr.io/cyberscan2/ts-node-cloud-builder:latest
           # gcr.io/cyberscan2/ts-node-cloud-builder/commit:${{ github.sha }}
