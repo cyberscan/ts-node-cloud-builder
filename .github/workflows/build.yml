@@ -42,7 +42,6 @@ jobs:
         with:
           cache-from: type=gha
           cache-to: type=gha
-          file: ts-node-cloud-builder.Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
