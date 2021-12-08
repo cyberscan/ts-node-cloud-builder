@@ -6,5 +6,7 @@
 .gitignore
 Dockerfile
 README.md
+action.Dockerfile
+action.yml
 cloudbuild.yaml
 node_modules

@@ -4,9 +4,9 @@ A build container for Typescript/node.js projects, includes Yarn and Lerna, as w
 
 Prebuilt, ready-to-use images can be found at:
 
-- `gcr.io/cyberscanauth/ts-node-cloud-builder`
-- `gcr.io/cyberscan2/ts-node-cloud-builder`
 - `ghcr.io/cyberscan/ts-node-cloud-builder`
+- `gcr.io/cyberscanauth/ts-node-cloud-builder` (not publically accessible, for internal use)
+- `gcr.io/cyberscan2/ts-node-cloud-builder` (not publically accessible, for internal use)
 
 ## Usage
 

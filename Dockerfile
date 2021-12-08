@@ -1,6 +1,6 @@
 ARG NODE_VERSION=16
 
-FROM node:${NODE_VERSION}-buster-slim
+FROM node:${NODE_VERSION}-buster
 
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
@@ -20,15 +20,11 @@ ENV LANG=C.UTF-8 \
     PREFIX="$NPM_CONFIG_PREFIX" \
     PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
+USER node
 WORKDIR /home/node
 COPY --chown=node:node lerna-resolver lerna-resolver
 
 RUN set -eux; \
-    apt-get update; \
-    apt-get upgrade --yes; \
-    apt-get install --yes --no-install-recommends \
-      bzip2 \
-    ; \
     cd lerna-resolver; \
       yarn pack lerna-resolver ; \
     cd - ; \
@@ -41,9 +37,7 @@ RUN set -eux; \
       "@vue/cli-service-global@${VUE_CLI_VERSION}" \
     ; \
     yarn cache clean --all; \
-    rm -f lerna-resolver/lerna-resolver-v1.0.0.tgz; \
-    apt-get clean; \
-    rm -rf /var/lib/apt/lists/*;
+    rm -f lerna-resolver/lerna-resolver-v1.0.0.tgz;
 
 ENTRYPOINT [ "yarn" ]
 CMD []
