@@ -45,10 +45,10 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}/commit:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
             ghcr.io/${{ github.repository }}:${{ env.BUILD_TIMESTAMP }}
             gcr.io/cyberscan2/ts-node-cloud-builder:latest
-            gcr.io/cyberscan2/ts-node-cloud-builder/commit:${{ github.sha }}
+            gcr.io/cyberscan2/ts-node-cloud-builder:${{ github.sha }}
             gcr.io/cyberscan2/ts-node-cloud-builder:${{ env.BUILD_TIMESTAMP }}
 
       # The image is also tagged & pushed as gcr.io/cyberscanauth/ts-node-cloud-builder for backwards compat.
@@ -64,10 +64,10 @@ jobs:
       - name: Push image to cyberscanauth Google Container Registry
         uses: akhilerm/tag-push-action@v2.0.0
         with:
-          src: ghcr.io/${{ github.repository }}/commit:${{ github.sha }}
+          src: ghcr.io/${{ github.repository }}:${{ github.sha }}
           dst: |
             gcr.io/cyberscanauth/ts-node-cloud-builder:latest
-            gcr.io/cyberscanauth/ts-node-cloud-builder/commit:${{ github.sha }}
+            gcr.io/cyberscanauth/ts-node-cloud-builder:${{ github.sha }}
             gcr.io/cyberscanauth/ts-node-cloud-builder:${{ env.BUILD_TIMESTAMP }}
 
       - name: Return image digest
