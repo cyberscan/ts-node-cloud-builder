@@ -4,12 +4,12 @@ description: |
 inputs:
   entrypoint:
     description: |
-      The command to run, e.g. "yarn", "lerna". See README.md for details.
+      The command to run, e.g. "yarn", "lerna" (entrypoint.sh forks this as a new process).
     required: true
     default: yarn
   args:
     description: |
-      The arguments to pass to the command, e.g. [ "run", "build" ]. Must be a JSON-formatted string.
+      The arguments to pass to the command, e.g. [ "run, "build" ]. Must be a JSON-formatted string.
     required: true
 runs:
   using: "docker"

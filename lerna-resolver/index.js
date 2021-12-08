@@ -113,9 +113,9 @@ function processPackage(package, destinationFolder) {
   const packageDestination = normalize(join(destinationFolder, package.name));
 
   if (options.debug) {
-    copyOptions.verbose = true;
     console.log(`unlink dir ${packageDestination}`);
     console.log(`copy from "${packageSourceGlob}" to "${packageDestination}"`);
+    copyOptions.verbose = true;
   }
 
   // prevent copy if dryrun
@@ -126,10 +126,6 @@ function processPackage(package, destinationFolder) {
   copyfiles([packageSourceGlob, packageDestination], copyOptions, (err) => {
     if (err) {
       throw `Error: ${err.message}`;
-    } else if (options.debug) {
-      console.log(
-        `copyfiles (${[packageSourceGlob, packageDestination]}, ${copyOptions})`
-      );
     }
   });
 }
