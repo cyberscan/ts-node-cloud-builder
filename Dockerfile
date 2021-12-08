@@ -28,14 +28,14 @@ RUN set -eux; \
       yarn pack lerna-resolver ; \
     cd - ; \
     yarn global add \
-      "file:///home/node/lerna-resolver/lerna-resolver-v1.0.0.tgz" \
+      "file:///home/node/lerna-resolver/lerna-resolver-v0.0.1.tgz" \
       "typescript@${TYPESCRIPT_VERSION}" \
       "lerna@${LERNA_VERSION}" \
       "@vue/cli@${VUE_CLI_VERSION}" \
       "@vue/cli-service-global@${VUE_CLI_VERSION}" \
     ; \
     yarn cache clean --all; \
-    rm -f lerna-resolver/lerna-resolver-v1.0.0.tgz;
+    rm -f lerna-resolver/lerna-resolver-v0.0.1.tgz;
 
 ENTRYPOINT [ "yarn" ]
 CMD []
