@@ -89,9 +89,10 @@ function cli() {
 }
 
 function processPackage(package, destinationFolder) {
-  // follow symlinks and copy instead of copy symlink
   const copyOptions = {
-    follow: true,
+    all: true, // include files & directories begining with a dot
+    follow: true, // dereference symlinks
+    error: true, // throw error if nothing is copied
   };
 
   // files to copy
@@ -112,7 +113,7 @@ function processPackage(package, destinationFolder) {
   const packageDestination = normalize(join(destinationFolder, package.name));
 
   if (options.debug) {
-    options.verbose = true;
+    copyOptions.verbose = true;
     console.log(`unlink dir ${packageDestination}`);
     console.log(`copy from "${packageSourceGlob}" to "${packageDestination}"`);
   }
@@ -125,6 +126,10 @@ function processPackage(package, destinationFolder) {
   copyfiles([packageSourceGlob, packageDestination], copyOptions, (err) => {
     if (err) {
       throw `Error: ${err.message}`;
+    } else if (options.debug) {
+      console.log(
+        `copyfiles (${[packageSourceGlob, packageDestination]}, ${copyOptions})`
+      );
     }
   });
 }
