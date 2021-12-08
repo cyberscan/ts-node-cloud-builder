@@ -2,8 +2,12 @@
 
 set -eo pipefail
 
-_entrypoint="$1"
-shift
+if [ -z "$1" ]; then
+  _entrypoint="yarn"
+else
+  _entrypoint="$1"
+  shift
+fi
 
 if ! command -v "$_entrypoint" > /dev/null 2>&1; then
   echo "::error ::Command not found: $_entrypoint"
@@ -11,10 +15,9 @@ if ! command -v "$_entrypoint" > /dev/null 2>&1; then
 fi
 
 if [ -n "$1" ]; then
-  IFS=', ' read -r -a _args <<< "$1"
+  IFS=' ' read -r -a _args <<< "$1"
   shift
+  exec "$_entrypoint" "${_args[@]}" "$@"
 else
-  declare -a _args
+  exec "$_entrypoint" "$@"
 fi
-
-exec "$_entrypoint" "${_args[@]}" "$@"

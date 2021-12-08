@@ -2,18 +2,20 @@ name: ts-node-cloud-builder
 description: |
   A build container for Typescript/node.js projects, includes Yarn and Lerna, as well as tooling for Vue 2.
 inputs:
-  cmd:
+  entrypoint:
     description: |
       The command to run, e.g. "yarn" or "lerna" (entrypoint.sh forks this as a new process).
-    required: true
+    required: false
     default: yarn
-  cmdline:
+  args:
     description: |
       The argument(s) to pass to the command, e.g. "install" or "bootstrap". Can be a space-separated list.
-    required: true
+    required: false
+    default: ""
 runs:
   using: "docker"
-  image: "action.Dockerfile"
+  image: "docker://ghcr.io/ghcr.io/cyberscan/ts-node-cloud-builder:latest"
+  entrypoint: "/home/node/entrypoint.sh"
   args:
-    - ${{ inputs.cmd }}
-    - ${{ inputs.cmdline }}
+    - ${{ inputs.entrypoint }}
+    - ${{ inputs.args }}

@@ -19,8 +19,7 @@ ENV LANG=C.UTF-8 \
     PREFIX="$NPM_CONFIG_PREFIX" \
     PATH="$NPM_CONFIG_PREFIX/bin:/workspace/node_modules/.bin:$PATH"
 
-# https://cloud.google.com/build/docs/build-config#dir
-WORKDIR /workspace
+COPY --chown=node:node entrypoint.sh /home/node/entrypoint.sh
 COPY --chown=node:node lerna-resolver /home/node/lerna-resolver
 
 RUN set -eux; \
@@ -36,6 +35,9 @@ RUN set -eux; \
     ; \
     yarn cache clean --all; \
     rm -f lerna-resolver/lerna-resolver-v0.0.1.tgz;
+
+# https://cloud.google.com/build/docs/build-config#dir
+WORKDIR /workspace
 
 ENTRYPOINT [ "yarn" ]
 CMD []
