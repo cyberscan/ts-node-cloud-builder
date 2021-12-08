@@ -17,11 +17,14 @@ ENV LANG=C.UTF-8 \
     NPM_CONFIG_PREFIX="$NPM_CONFIG_PREFIX" \
 # https://github.com/yarnpkg/yarn/issues/3287#issuecomment-298987967
     PREFIX="$NPM_CONFIG_PREFIX" \
-    PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+    PATH="$NPM_CONFIG_PREFIX/bin:/workspace/node_modules/.bin:$PATH"
 
 #USER node
-WORKDIR /home/node
-COPY --chown=node:node lerna-resolver lerna-resolver
+#WORKDIR /home/node
+
+# https://cloud.google.com/build/docs/build-config#dir
+WORKDIR /workspace
+COPY --chown=node:node lerna-resolver /home/node/lerna-resolver
 
 RUN set -eux; \
     cd lerna-resolver; \
