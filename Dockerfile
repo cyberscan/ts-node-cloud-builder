@@ -4,7 +4,6 @@ FROM node:${NODE_VERSION}-buster
 
 ARG TYPESCRIPT_VERSION=4.x
 ARG LERNA_VERSION=3.x
-ARG CPX_VERSION=1.5.x
 ARG VUE_CLI_VERSION=next
 
 # https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md#global-npm-dependencies
@@ -32,7 +31,6 @@ RUN set -eux; \
       "file:///home/node/lerna-resolver/lerna-resolver-v1.0.0.tgz" \
       "typescript@${TYPESCRIPT_VERSION}" \
       "lerna@${LERNA_VERSION}" \
-      "cpx@${CPX_VERSION}" \
       "@vue/cli@${VUE_CLI_VERSION}" \
       "@vue/cli-service-global@${VUE_CLI_VERSION}" \
     ; \
