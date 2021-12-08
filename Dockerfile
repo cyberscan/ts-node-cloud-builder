@@ -27,7 +27,7 @@ WORKDIR /workspace
 COPY --chown=node:node lerna-resolver /home/node/lerna-resolver
 
 RUN set -eux; \
-    cd lerna-resolver; \
+    cd /home/node/lerna-resolver; \
       yarn pack lerna-resolver ; \
     cd - ; \
     yarn global add \
