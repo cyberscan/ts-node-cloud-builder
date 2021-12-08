@@ -20,7 +20,7 @@ ENV LANG=C.UTF-8 \
     PREFIX="$NPM_CONFIG_PREFIX" \
     PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 
-USER node
+#USER node
 WORKDIR /home/node
 COPY --chown=node:node lerna-resolver lerna-resolver
 
