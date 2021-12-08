@@ -122,7 +122,11 @@ function processPackage(package, destinationFolder) {
     return;
   }
 
-  copyfiles([packageSourceGlob, packageDestination], copyOptions);
+  copyfiles([packageSourceGlob, packageDestination], copyOptions, (err) => {
+    if (err) {
+      throw `Error: ${err.message}`;
+    }
+  });
 }
 
 cli();
