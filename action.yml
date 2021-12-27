@@ -14,7 +14,7 @@ inputs:
     default: ""
 runs:
   using: "docker"
-  image: "docker://ghcr.io/cyberscan/ts-node-cloud-builder:latest"
+  image: "docker://ghcr.io/cyberscan/ts-node-cloud-builder:lts"
   entrypoint: "/home/node/entrypoint.sh"
   args:
     - ${{ inputs.entrypoint }}

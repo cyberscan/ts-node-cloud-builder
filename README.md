@@ -1,6 +1,6 @@
 # ts-node-cloud-builder
 
-A build container for Typescript/node.js projects, includes Yarn and Lerna, as well as tooling for Vue 2.
+A build container for Typescript/node.js projects, includes Yarn and Lerna, as well as tooling for Vue 2. Please note that this project is intended for internal use at our organization and only publically visible due to Github not offering a means to use [Actions](https://docs.github.com/en/actions) defined in private repositories. The functionality in and visibility of this repository may change without notice.
 
 Prebuilt, ready-to-use images can be found at:
 
@@ -18,15 +18,20 @@ Furthermore, there's a special `lts` tag, corresponding to the current LTS relea
 
 ## Usage
 
-The builder can be used in Google Cloud Build steps in the following fashion:
+The builder can be used in one of two ways: As part of a Github Actions workflow, and as part of a Google Cloud Build pipeline.
+
+### Usage: Google Cloud Build
+
+The builder can be used as a Google Cloud Build step in the following fashion:
 
 ```yaml
 # cloudbuild.yaml
+
 steps:
   #
   # Do Lerna things
   #
-  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder:14"
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
     entrypoint: "lerna"
     args:
       - "bootstrap"
@@ -34,7 +39,7 @@ steps:
   # Do Yarn/npm things (e.g. package.json script invocation)
   # The default entrypoint of the container is yarn, so this works:
   #
-  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder:14"
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
     args:
       - "run"
       - "build"
@@ -42,7 +47,7 @@ steps:
   # You could also invoke any arbitrary command by specifying it as
   # entrypoint. Bash might be handy occasionally, for example:
   #
-  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder:14"
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
     entrypoint: "bash"
     args:
       - "-c"
@@ -59,4 +64,66 @@ steps:
             exit 1
             ;;
         esac
+  #
+  # You should, whenever possible, specify the target major version
+  # of node.js to use during a build. Otherwise, it defaults to using
+  # the LTS version.
+  #
+  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder:16"
+    args:
+      - "run"
+      - "test"
+```
+
+### Usage: Github Actions
+
+The general ideas outlined in [Usage: Google Cloud Build](#usage) also apply to using the builder as a job step in a Github Actions workflow, but the syntax differs:
+
+```yaml
+# workflow.yml
+
+steps:
+  #
+  # Do Lerna things
+  #
+  - uses: cyberscan/ts-node-cloud-builder@master
+    with:
+      entrypoint: lerna
+      args: bootstrap
+  #
+  # Do Yarn/npm things (e.g. package.json script invocation)
+  # The default entrypoint of the container is yarn, so this works:
+  #
+  - uses: cyberscan/ts-node-cloud-builder@master
+    with:
+      args: build
+  #
+  # You could also invoke any arbitrary command by specifying it as
+  # entrypoint. Bash might be handy occasionally, for example:
+  #
+  - uses: cyberscan/ts-node-cloud-builder@master
+    with:
+      entrypoint: bash
+      args: |
+        -c
+        case "$SOMETHING" in
+          "banana")
+            echo "apple"
+            ;;
+          "apple")
+            echo "banana"
+            ;;
+          *)
+            echo "pineapple-pen"
+            exit 1
+            ;;
+        esac
+  #
+  # You should, whenever possible, specify the target major version
+  # of node.js to use during a build. Otherwise, it defaults to using
+  # the LTS version.
+  #
+  - uses: cyberscan/ts-node-cloud-builder@16
+    with:
+      args: run test
 ```
