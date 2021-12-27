@@ -97,6 +97,6 @@ jobs:
         with:
           src: ghcr.io/${{ github.repository }}:${{ matrix.node_version }}-${{ github.sha }}
           dst: |
-            gcr.io/cyberscan2/ts-node-cloud-builder:latest
+            gcr.io/cyberscanauth/ts-node-cloud-builder:latest
       #
       #####################################################################################################################
