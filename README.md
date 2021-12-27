@@ -44,27 +44,6 @@ steps:
       - "run"
       - "build"
   #
-  # You could also invoke any arbitrary command by specifying it as
-  # entrypoint. Bash might be handy occasionally, for example:
-  #
-  - name: "gcr.io/${PROJECT_ID}/ts-node-cloud-builder"
-    entrypoint: "bash"
-    args:
-      - "-c"
-      - |
-        case "$SOMETHING" in
-          "banana")
-            echo "apple"
-            ;;
-          "apple")
-            echo "banana"
-            ;;
-          *)
-            echo "pineapple-pen"
-            exit 1
-            ;;
-        esac
-  #
   # You should, whenever possible, specify the target major version
   # of node.js to use during a build. Otherwise, it defaults to using
   # the LTS version.
@@ -97,27 +76,6 @@ steps:
   - uses: cyberscan/ts-node-cloud-builder@master
     with:
       args: build
-  #
-  # You could also invoke any arbitrary command by specifying it as
-  # entrypoint. Bash might be handy occasionally, for example:
-  #
-  - uses: cyberscan/ts-node-cloud-builder@master
-    with:
-      entrypoint: bash
-      args: |
-        -c
-        case "$SOMETHING" in
-          "banana")
-            echo "apple"
-            ;;
-          "apple")
-            echo "banana"
-            ;;
-          *)
-            echo "pineapple-pen"
-            exit 1
-            ;;
-        esac
   #
   # You should, whenever possible, specify the target major version
   # of node.js to use during a build. Otherwise, it defaults to using
