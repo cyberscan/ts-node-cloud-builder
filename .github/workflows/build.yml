@@ -26,7 +26,7 @@ jobs:
 
     strategy:
       matrix:
-        node-versions: ["12", "14", "16", "lts"]
+        node_version: ["12", "14", "16", "lts"]
 
     steps:
       - name: Set up Docker Buildx
