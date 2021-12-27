@@ -62,7 +62,7 @@ jobs:
             gcr.io/cyberscan2/ts-node-cloud-builder:${{ matrix.node_version }}-${{ github.sha }}
 
       # Special treatment for lts & latest, see README.md for details
-      - if: matrix.node_version == "lts"
+      - if: matrix.node_version == 'lts'
         name: 'Tag "lts" as "latest"'
         uses: akhilerm/tag-push-action@v2.0.0
         with:
@@ -91,7 +91,7 @@ jobs:
             gcr.io/cyberscanauth/ts-node-cloud-builder:${{ matrix.node_version }}
             gcr.io/cyberscanauth/ts-node-cloud-builder:${{ matrix.node_version }}-${{ github.sha }}
       #
-      - if: matrix.node_version == "lts"
+      - if: matrix.node_version == 'lts'
         name: 'Tag "lts" as "latest" (cyberscanauth)'
         uses: akhilerm/tag-push-action@v2.0.0
         with:
