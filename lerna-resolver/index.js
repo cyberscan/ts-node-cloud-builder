@@ -93,6 +93,7 @@ function processPackage(package, destinationFolder) {
     all: true, // include files & directories begining with a dot
     follow: true, // dereference symlinks
     error: true, // throw error if nothing is copied
+    up: 3, // slice 3 dir from source destination (copyfiles fix)
   };
 
   // files to copy
