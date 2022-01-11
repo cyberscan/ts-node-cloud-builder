@@ -5,7 +5,7 @@ const { sync: commandExistsSync } = require("command-exists");
 const { execSync } = require("child_process");
 const { existsSync, unlinkSync, lstatSync, rmdirSync } = require("fs");
 const { join, normalize } = require("path");
-const copyfiles = require("copyfiles");
+const cpx = require('cpx');
 const program = new Command();
 
 program.version("0.0.1");
@@ -90,10 +90,8 @@ function cli() {
 
 function processPackage(package, destinationFolder) {
   const copyOptions = {
-    all: true, // include files & directories begining with a dot
-    follow: true, // dereference symlinks
-    error: true, // throw error if nothing is copied
-    up: 2, // slice 2 dir from source destination (copyfiles fix)
+    dereference: true,
+    includeEmptyDirs: true,
   };
 
   // files to copy
@@ -124,11 +122,7 @@ function processPackage(package, destinationFolder) {
     return;
   }
 
-  copyfiles([packageSourceGlob, packageDestination], copyOptions, (err) => {
-    if (err) {
-      throw `Error: ${err.message}`;
-    }
-  });
+  cpx.copySync(packageSourceGlob, packageDestination, copyOptions)
 }
 
 cli();

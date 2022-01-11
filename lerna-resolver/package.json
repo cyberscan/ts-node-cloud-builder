@@ -15,6 +15,6 @@
   "dependencies": {
     "command-exists": "^1.2.9",
     "commander": "^7.1.0",
-    "copyfiles": "^2.4.1"
+    "cpx": "^1.5.0"
   }
 }
