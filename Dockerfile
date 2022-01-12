@@ -23,6 +23,12 @@ COPY --chown=node:node entrypoint.sh /home/node/entrypoint.sh
 COPY --chown=node:node lerna-resolver /home/node/lerna-resolver
 
 RUN set -eux; \
+    apt-get update; \
+    apt-get upgrade -y; \
+    apt-get install -y --no-install-recommends bzip2; \
+    apt-get clean -y; \
+    rm -rf /var/lib/apt/lists/*; \
+# Add lerna-resolver
     cd /home/node/lerna-resolver; \
       yarn pack lerna-resolver ; \
     cd - ; \
