@@ -26,7 +26,8 @@ jobs:
 
     strategy:
       matrix:
-        node_version: ["12", "14", "16", "lts"]
+        # node > 16 will fail, since some deps require node <= 16
+        node_version: ["12", "14", "16"]
 
     steps:
       - name: Set up Docker Buildx
