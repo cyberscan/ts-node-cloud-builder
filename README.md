@@ -1,4 +1,7 @@
 # ts-node-cloud-builder
+> DEPRECATED
+>
+> This project is no longer in active development and should not be used anymore.
 
 A build container for Typescript/node.js projects, includes Yarn and Lerna, as well as tooling for Vue 2. Please note that this project is intended for internal use at our organization and only publically visible due to Github not offering a means to use [Actions](https://docs.github.com/en/actions) defined in private repositories. The functionality in and visibility of this repository may change without notice.
 
