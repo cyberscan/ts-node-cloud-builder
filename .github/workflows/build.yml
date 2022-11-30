@@ -33,7 +33,7 @@ jobs:
         uses: docker/setup-buildx-action@v2.2.1
 
       - name: Log in to Github Container Registry
-        uses: docker/login-action@v1.10.0
+        uses: docker/login-action@v2.1.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -41,7 +41,7 @@ jobs:
 
       # Get access to GCR: https://github.com/docker/login-action#google-container-registry-gcr
       - name: Log in to Google Container Registry (cyberscan2)
-        uses: docker/login-action@v1.10.0
+        uses: docker/login-action@v2.1.0
         with:
           registry: gcr.io
           username: _json_key
@@ -77,7 +77,7 @@ jobs:
       # removed eventually.
       #
       - name: Log in to Google Container Registry (cyberscanauth)
-        uses: docker/login-action@v1.10.0
+        uses: docker/login-action@v2.1.0
         with:
           registry: gcr.io
           username: _json_key
