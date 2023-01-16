@@ -51,7 +51,7 @@ jobs:
       # Build the base image (for use in Google Cloud Build)
       - name: Build and push image
         id: build
-        uses: docker/build-push-action@v3.2.0
+        uses: docker/build-push-action@v3.3.0
         with:
           push: true
           build-args: |
